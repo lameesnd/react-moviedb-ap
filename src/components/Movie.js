@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 //Config
 import { IMAGE_BASE_URL, POSTER_SIZE } from '../config';
 //Components
+import BreadCrumb from "./BreadCrumb";
+import MovieInfo from "./MovieInfo";
 import Grid from "./Grid";
 import Spinner from "./Spinner";
 
@@ -16,9 +18,13 @@ const Movie = () => {
     const {state: movie,loading,error}=useMovieFetch(movieId); // rename state to movie
 
     console.log(movie);
+    if(loading) return <Spinner/>;
+    if(error) return <div>Something went wrong ...</div>
+
     return (
         <React.Fragment>
-            <div>Movie</div>
+            <BreadCrumb movieTitle={movie.original_title} />
+            <MovieInfo movie={movie}/>
         </React.Fragment>
     );
 }
