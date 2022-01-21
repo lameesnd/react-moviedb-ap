@@ -8,6 +8,7 @@ import MovieInfo from "./MovieInfo";
 import Grid from "./Grid";
 import Spinner from "./Spinner";
 import MovieInfoBar from "./MovieInfoBar";
+import Actor from "./Actor";
 
 //Hooks
 import { useMovieFetch } from '../hooks/useMovieFetch';
@@ -15,18 +16,34 @@ import { useMovieFetch } from '../hooks/useMovieFetch';
 import NoImage from '../images/no_image.jpg'
 
 const Movie = () => {
-    const {movieId}=useParams(); // get id from url, same name as in App.js
-    const {state: movie,loading,error}=useMovieFetch(movieId); // rename state to movie
+    const { movieId } = useParams(); // get id from url, same name as in App.js
+    const { state: movie, loading, error } = useMovieFetch(movieId); // rename state to movie
 
     console.log(movie);
-    if(loading) return <Spinner/>;
-    if(error) return <div>Something went wrong ...</div>
+    if (loading) return <Spinner />;
+    if (error) return <div>Something went wrong ...</div>
 
     return (
         <React.Fragment>
             <BreadCrumb movieTitle={movie.original_title} />
-            <MovieInfo movie={movie}/>
+            <MovieInfo movie={movie} />
             <MovieInfoBar time={movie.runtime} budget={movie.budget} revenue={movie.revenue} />
+            <Grid header='Actors'>
+                {
+                    movie.actors.map(actor => (
+                        <Actor
+                            key={actor.credit_id}
+                            name={actor.name}
+                            character={actor.character}
+                            image={
+                                actor.profile_path
+                                    ? `${IMAGE_BASE_URL}${POSTER_SIZE}${actor.profile_path}`
+                                    : NoImage
+                            }
+                        />
+                    ))
+                }
+            </Grid>
         </React.Fragment>
     );
 }
