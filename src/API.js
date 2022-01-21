@@ -19,7 +19,7 @@ const apiSettings = {
     fetchMovies: async(searchTerm, page) => {
         const endpoint = searchTerm ?
             `${SEARCH_BASE_URL}${searchTerm}&page=${page}` :
-            `${POPULAR_BASE_URL}&page=${page}`;
+            `${POPULAR_BASE_URL}&page=${page}`; // template literal
         return await (await fetch(endpoint)).json(); // first await to await for the result of the endpoint, second await is to convert to result to json
     },
     fetchMovie: async movieId => {
