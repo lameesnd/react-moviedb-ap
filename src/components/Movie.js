@@ -19,7 +19,6 @@ const Movie = () => {
     const { movieId } = useParams(); // get id from url, same name as in App.js
     const { state: movie, loading, error } = useMovieFetch(movieId); // rename state to movie
 
-    console.log(movie);
     if (loading) return <Spinner />;
     if (error) return <div>Something went wrong ...</div>
 
