@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
+//Helpers
+import { isPersistedState } from '../helpers';
 // API
 import API from '../API';
 
@@ -34,8 +36,16 @@ export const useHomeFetch = () => {
     };
     //Initial render and search
     useEffect(() => {
+        if (!searchTerm) {
+            const sessionState = isPersistedState('homeState');
+            if (sessionState) { //if state exist in sessionstorage, retreive and set it
+                console.log('Grabbing from Session Storage');
+                setState(sessionState);
+                return;
+            }
+        }
+        console.log('Grabbing from API');
         setState(initialState); // whipe up old state
-
         fetchMovies(1, searchTerm);
     }, [searchTerm]); //if dependency is empty, it will only trigger on mount
 
@@ -45,5 +55,10 @@ export const useHomeFetch = () => {
         setIsLoadingMore(false);
     }, [isLoadingMore, searchTerm, state.page]);
 
+    //write session storage
+    useEffect(() => {
+        if (!searchTerm)
+            sessionStorage.setItem('homeState', JSON.stringify(state));
+    }, [searchTerm, state]);
     return { state, loading, error, searchTerm, setSearchTerm, setIsLoadingMore };
 }
