@@ -39,12 +39,12 @@ export const useHomeFetch = () => {
         if (!searchTerm) {
             const sessionState = isPersistedState('homeState');
             if (sessionState) { //if state exist in sessionstorage, retreive and set it
-                console.log('Grabbing from Session Storage');
+                // console.log('Grabbing from Session Storage');
                 setState(sessionState);
                 return;
             }
         }
-        console.log('Grabbing from API');
+        //   console.log('Grabbing from API');
         setState(initialState); // whipe up old state
         fetchMovies(1, searchTerm);
     }, [searchTerm]); //if dependency is empty, it will only trigger on mount
