@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Config
-import { POSTER_SIZE, BACKDROP_SIZE, IMAGE_BASE_URL } from '../config';
+import {BACKDROP_SIZE, IMAGE_BASE_URL } from '../config';
 // Components
 import HeroImage from './HeroImage';
 import Grid from './Grid';

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 //Helpers
 import { isPersistedState } from '../helpers';
 // API
