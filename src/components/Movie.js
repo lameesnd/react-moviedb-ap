@@ -34,7 +34,7 @@ const Movie = () => {
                             key={actor.credit_id}
                             name={actor.name}
                             character={actor.character}
-                            image={
+                            imageurl={
                                 actor.profile_path
                                     ? `${IMAGE_BASE_URL}${POSTER_SIZE}${actor.profile_path}`
                                     : NoImage
